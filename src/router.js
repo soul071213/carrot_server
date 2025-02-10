@@ -1,6 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
+const multer =require('multer');
+const upload = multer({dest:'storage/'});
+
+router.post('/file',upload.single('file'),(req,res)=>{
+    console.log(req.file);
+    res.json(req.file);
+});
+
+
 const webController=require('./web/controller');
 const apiFeedController=require('./api/feed/controller');
 const apiUserController=require('./api/user/controller');
@@ -13,7 +22,7 @@ router.get('/',webController.home);
 router.get('/page/:route',logReguestTime,webController.page);
 
 //전역적으로 미들웨어 적용
-router.use(logReguestTime);
+// router.use(logReguestTime);
 
 router.post('/auth/phone',apiUserController.phone);
 router.put('/auth/phone',apiUserController.phoneVerify);
