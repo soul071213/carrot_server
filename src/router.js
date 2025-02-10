@@ -5,9 +5,15 @@ const webController=require('./web/controller');
 const apiFeedController=require('./api/feed/controller');
 const apiUserController=require('./api/user/controller');
 
-router.get('/',webController.home);
-router.get('/page/:route',webController.page);
 
+const {logReguestTime}=require('./middleware/log');
+
+router.get('/',webController.home);
+//특정 라우트에 대해 로그 미들웨어 적용
+router.get('/page/:route',logReguestTime,webController.page);
+
+//전역적으로 미들웨어 적용
+router.use(logReguestTime);
 
 router.post('/auth/phone',apiUserController.phone);
 router.put('/auth/phone',apiUserController.phoneVerify);
