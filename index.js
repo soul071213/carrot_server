@@ -32,3 +32,7 @@ app.listen(port,()=>{
 //multer는 node js 의 강력한 파일 업로드 기능을 제공하는 미들웨어로 주로 이미지, 동영상 파일 등을 처리할 때 사용됩니다.
 //이 미들웨어는 multiple/form-data 형식의 데이터를 쉽게 파싱할 수 있도록 해주며,  파일을 서버에 효율저그올 저장하고 관리할 수 있는 기능을 제공합니다.
 //npm install --save multer
+
+
+//JWT
+//설치 npm install --save jsonwebtoken

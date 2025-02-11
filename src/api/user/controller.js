@@ -1,3 +1,5 @@
+const generateToken=require('./jwt');
+
 exports.phone =(req,res)=>{
     res.send('인증 번호 발송');
 }
@@ -16,8 +18,16 @@ exports.phoneVerify =(req,res)=>{
     res.json({result:"fail",message:"인증 번호가 맞지 않습니다."});
 }
 
-exports.register =(req,res)=>{
-    res.send('회원 가입');
+exports.register = async (req,res)=>{
+    //사용자 정보 검증 로직이 들어갈 위치
+    try{
+        const userInfo = {id:1,name:'홍길동'}; //가정된 사용자 정보
+        const token = await generateToken(userInfo);
+
+        res.json({result :"ok",access_token:token});
+    }catch(error){
+        res.status(500).json({result:"error",message:"토큰 발급 실패"});
+    }
 }
 
 exports.login =(req,res)=>{

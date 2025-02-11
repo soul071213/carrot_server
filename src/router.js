@@ -26,7 +26,7 @@ router.get('/page/:route',logReguestTime,webController.page);
 
 router.post('/auth/phone',apiUserController.phone);
 router.put('/auth/phone',apiUserController.phoneVerify);
-router.post('/auth/register',apiUserController.phone);
+router.post('/auth/register',apiUserController.register);
 router.post('/auth/login',apiUserController.login);
 router.post('/api/user/my',apiUserController.update);
 
