@@ -36,4 +36,9 @@ router.get('/api/feed/:id',apiFeedController.show);
 router.put('/api/feed/:id',apiFeedController.update);
 router.delete('/api/feed/:id',apiFeedController.delete);
 
+
+const fileController = require('./api/file/controller')
+
+router.post('/file',upload.single('file'),fileController.upload);
+
 module.exports= router;
