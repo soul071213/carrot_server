@@ -30,6 +30,15 @@ router.post('/auth/register',apiUserController.register);
 router.post('/auth/login',apiUserController.login);
 router.post('/api/user/my',apiUserController.update);
 
+const authenticateToken = require('./middleware/authenticate');
+
+//피드 관련 라우트, 모든 요청에 인증 필요
+router.use(authenticateToken); // 이후 모든 라우트에 인즈 필요
+
+//마이페이지 라우트 인증 필요
+router.get('/api/user/my',authenticateToken,apiUserController.show);
+router.put('api/user/my',authenticateToken, apiUserController.update);
+
 router.get('/api/feed',apiFeedController.index);
 router.post('/api/feed',apiFeedController.store);
 router.get('/api/feed/:id',apiFeedController.show);
@@ -39,6 +48,7 @@ router.delete('/api/feed/:id',apiFeedController.delete);
 
 const fileController = require('./api/file/controller')
 
-router.post('/file',upload.single('file'),fileController.upload);
+router.post('/fileUpload',upload.single('file'),fileController.upload);
+router.get('/file/:id',fileController.download);
 
 module.exports= router;

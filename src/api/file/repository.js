@@ -20,3 +20,8 @@ exports.create=async (name,path,size)=>{
 //이는 요청에 올바르게 처리되지 않았음을 나타내므로, 오류 메시지와 함께 응답을 반환할 수 있습니다.
 // 반대로 , affetedRow가 1이상이면 데이터가 성공적으로 삽입되었음을 의미합니다.
 
+exports.show = async (id) =>{
+    const query=`SELECT * FROM files where id = ?`;
+    const result = await pool.query(query,[id]);
+    return (result.length<0)?null:result[0];
+}

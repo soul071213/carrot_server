@@ -12,3 +12,19 @@ exports.upload=async(req,res)=>{
     }
     return res.json({result:'fail'});
 };
+
+exports.download =async(req,res)=>{
+    const {id} =req.params;
+
+    const item=await repository.show(id);
+
+    if(item==null){
+        return res.send({result:'fail'});
+    }
+
+    res.download(item.file_path,item.original_name,(err)=>{
+        if(err){
+            res.send({result:"error",messageL:err.message});
+        }
+    });
+}
